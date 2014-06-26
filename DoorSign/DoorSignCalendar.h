@@ -12,7 +12,10 @@
 
 @interface DoorSignCalendar : NSObject
 
+@property (readonly) NSString *title;
+
 - (instancetype)initWithCalendar:(EKCalendar*)calendar;
-- (void)getEvents;
+- (NSArray*)currentEvents;
+- (NSArray*)todaysEvents;
 
 @end

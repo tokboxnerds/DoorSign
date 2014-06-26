@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DoorSignCalendar.h"
+#import "TodayViewController.h"
 
 #import <EventKit/EventKit.h>
 
@@ -37,11 +38,11 @@
         NSLog(@"Access granted");
         [self getCalendars];
         
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"calendarList"];
-        [self presentViewController:vc animated:YES completion:nil];
-        
     }];
-    
+}
+
+-(BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,7 +56,9 @@
         if(cal.type == EKCalendarTypeExchange && [cal.title isEqualToString:@"TokRoom"]) {
             NSLog(@"Getting events for %@", cal);
             DoorSignCalendar *calendar = [[DoorSignCalendar alloc] initWithCalendar:cal];
-            [calendar getEvents];
+            TodayViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"todayView"];
+            vc.calendar = calendar;
+            [self presentViewController:vc animated:YES completion:nil];
         }
     }
 }
