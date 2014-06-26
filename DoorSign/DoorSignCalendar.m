@@ -26,8 +26,16 @@
     return self;
 }
 
+- (NSString*)title {
+    return self.calendar.title;
+}
 
-- (void)getEvents {
+- (NSArray*)currentEvents {
+    NSPredicate *predicate = [self.store predicateForEventsWithStartDate:[NSDate date] endDate:[NSDate date] calendars:@[self.calendar]];
+    return [self.store eventsMatchingPredicate:predicate];
+}
+
+- (NSArray*)todaysEvents {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *oneDayAgoComponents = [[NSDateComponents alloc] init];
     oneDayAgoComponents.day = -1;
@@ -48,6 +56,7 @@
     for(EKEvent *item in events) {
         NSLog(@"Event: %@ at %@ -> %@", item.title, [df stringFromDate:item.startDate], [df stringFromDate:item.endDate]);
     }
+    return events;
     
 }
 
@@ -65,5 +74,7 @@
     savedEventId = event.eventIdentifier;  //this is so you can access this event later
     return event;
 }
+
+#pragma mark - Calendar API
 
 @end

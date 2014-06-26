@@ -15,6 +15,9 @@
 		CD423A40195C8A4600745F6C /* DoorSignTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A3F195C8A4600745F6C /* DoorSignTests.m */; };
 		CD50C202195CB3C1001986DC /* DoorSignCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50C201195CB3C1001986DC /* DoorSignCalendar.m */; };
 		CD50C205195CB65F001986DC /* CalendarListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50C204195CB65F001986DC /* CalendarListTableViewController.m */; };
+		CD50C208195CB909001986DC /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50C207195CB909001986DC /* TodayViewController.m */; };
+		CD5616AA195CCF68002BFD2D /* TodayUpcomingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */; };
+		CD5616AD195CD26B002BFD2D /* TodayUpcomingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */; };
 		CDAEAC08195CA00300774277 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAEAC06195CA00300774277 /* EventKit.framework */; };
 		CDAEAC09195CA00300774277 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAEAC07195CA00300774277 /* EventKitUI.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +51,12 @@
 		CD50C201195CB3C1001986DC /* DoorSignCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorSignCalendar.m; sourceTree = "<group>"; };
 		CD50C203195CB65F001986DC /* CalendarListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarListTableViewController.h; sourceTree = "<group>"; };
 		CD50C204195CB65F001986DC /* CalendarListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarListTableViewController.m; sourceTree = "<group>"; };
+		CD50C206195CB909001986DC /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		CD50C207195CB909001986DC /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		CD5616A8195CCF68002BFD2D /* TodayUpcomingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayUpcomingTableViewController.h; path = ../TodayUpcomingTableViewController.h; sourceTree = "<group>"; };
+		CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayUpcomingTableViewController.m; path = ../TodayUpcomingTableViewController.m; sourceTree = "<group>"; };
+		CD5616AB195CD26B002BFD2D /* TodayUpcomingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayUpcomingTableViewCell.h; sourceTree = "<group>"; };
+		CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayUpcomingTableViewCell.m; sourceTree = "<group>"; };
 		CDAEAC06195CA00300774277 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		CDAEAC07195CA00300774277 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -106,6 +115,12 @@
 				CD50C201195CB3C1001986DC /* DoorSignCalendar.m */,
 				CD50C203195CB65F001986DC /* CalendarListTableViewController.h */,
 				CD50C204195CB65F001986DC /* CalendarListTableViewController.m */,
+				CD50C206195CB909001986DC /* TodayViewController.h */,
+				CD50C207195CB909001986DC /* TodayViewController.m */,
+				CD5616A8195CCF68002BFD2D /* TodayUpcomingTableViewController.h */,
+				CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */,
+				CD5616AB195CD26B002BFD2D /* TodayUpcomingTableViewCell.h */,
+				CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */,
 			);
 			path = DoorSign;
 			sourceTree = "<group>";
@@ -246,9 +261,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD50C208195CB909001986DC /* TodayViewController.m in Sources */,
 				CD50C202195CB3C1001986DC /* DoorSignCalendar.m in Sources */,
 				CD423A2F195C8A4600745F6C /* ViewController.m in Sources */,
 				CD423A2C195C8A4600745F6C /* AppDelegate.m in Sources */,
+				CD5616AA195CCF68002BFD2D /* TodayUpcomingTableViewController.m in Sources */,
+				CD5616AD195CD26B002BFD2D /* TodayUpcomingTableViewCell.m in Sources */,
 				CD50C205195CB65F001986DC /* CalendarListTableViewController.m in Sources */,
 				CD423A29195C8A4600745F6C /* main.m in Sources */,
 			);
