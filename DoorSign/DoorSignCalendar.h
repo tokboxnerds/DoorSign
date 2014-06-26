@@ -15,4 +15,6 @@
 - (instancetype)initWithCalendar:(EKCalendar*)calendar;
 - (void)getEvents;
 
+- (EKEvent*)addEvent:(NSString*)title startTime:(NSDate*)startTime endTime:(NSDate*)endTime;
+
 @end

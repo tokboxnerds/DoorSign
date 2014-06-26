@@ -7,13 +7,18 @@
 //
 
 #import "CalendarListTableViewController.h"
+#import <EventKit/EventKit.h>
+#import "DoorSignCalendar.h"
+
 
 @interface CalendarListTableViewController ()
+@property (nonatomic) EKEventStore *eventStore;
+@property (nonatomic) DoorSignCalendar *calendar;
 
 @end
 
 @implementation CalendarListTableViewController
-
+NSMutableArray *listOfCalendars;
 - (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -27,11 +32,27 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Pick a room";
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.eventStore = [[EKEventStore alloc] init];
+    NSArray *calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+    listOfCalendars = [NSMutableArray array];
+    for(EKCalendar *cal in calendars) {
+        [listOfCalendars addObject:cal.title];
+
+        /*if(cal.type == EKCalendarTypeExchange) {
+            NSLog(@"Getting events for %@", cal);
+            DoorSignCalendar *calendar = [[DoorSignCalendar alloc] initWithCalendar:cal];
+            [calendar getEvents];
+        }*/
+    }
+    NSLog(@" Calendars %@",listOfCalendars);
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,28 +65,43 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [listOfCalendars count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NSLog(@" HI ");
+    static NSString *simpleTableIdentifier = @"SimpleTableCell";
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    cell.textLabel.text = [listOfCalendars objectAtIndex:indexPath.row];
+    
+    for(int i=0; i < [listOfCalendars count]; i++) {
+        NSLog(@" Calendar List %lu", (unsigned long)[listOfCalendars indexOfObject:0]);
+    }
     
     return cell;
 }
-*/
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    EKCalendar *calendar = listOfCalendars[indexPath.row];
+    DoorSignCalendar *cal = [[DoorSignCalendar alloc] initWithCalendar:calendar];
+    EKEvent *event = [cal addEvent:@"Something" startTime:[NSDate date] endTime:[NSDate date]];
+    NSLog(@" Event ID %@ ",event.eventIdentifier);
+}
 
 /*
 // Override to support conditional editing of the table view.

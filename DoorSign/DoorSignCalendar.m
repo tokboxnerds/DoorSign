@@ -48,6 +48,22 @@
     for(EKEvent *item in events) {
         NSLog(@"Event: %@ at %@ -> %@", item.title, [df stringFromDate:item.startDate], [df stringFromDate:item.endDate]);
     }
+    
+}
+
+- (EKEvent*)addEvent:(NSString*)title startTime:(NSDate*)startTime endTime:(NSDate*)endTime {
+    _store =[[EKEventStore alloc] init];
+    __block NSString *savedEventId =[[NSString alloc] init];
+
+    EKEvent *event = [EKEvent eventWithEventStore:_store];
+    event.title = title;
+    event.startDate = startTime; //today
+    event.endDate = endTime;  //set 1 hour meeting
+    [event setCalendar:[_store defaultCalendarForNewEvents]];
+    NSError *err = nil;
+    [_store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+    savedEventId = event.eventIdentifier;  //this is so you can access this event later
+    return event;
 }
 
 @end
