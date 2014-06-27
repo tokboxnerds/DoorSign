@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Patrick Quinn-Graham. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <EventKit/EventKit.h>
 
 

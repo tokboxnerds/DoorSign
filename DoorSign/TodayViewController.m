@@ -8,6 +8,7 @@
 
 #import "TodayViewController.h"
 #import "TodayUpcomingTableViewController.h"
+#import "AddEventControllerTableViewController.h"
 
 #import "DoorSignCalendar.h"
 
@@ -94,11 +95,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
     if([segue.identifier isEqualToString:@"todayUpcomingEmbed"]) {
         NSLog(@"prepare for segue... %@", segue);
         TodayUpcomingTableViewController *vc = segue.destinationViewController;
         vc.calendar = self.calendar;
+    } else if([segue.identifier isEqualToString:@"addEventSegue"]) {
+        NSLog(@"prepare for addEventSegue");
+        UINavigationController *root = segue.destinationViewController;
+        AddEventControllerTableViewController *addVC = (AddEventControllerTableViewController *)root.topViewController;
+        addVC.calendar = self.calendar;
     }
 }
 

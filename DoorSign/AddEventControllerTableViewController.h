@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoorSignCalendar.h"
 
 @interface AddEventControllerTableViewController : UITableViewController
+
+@property (nonatomic) DoorSignCalendar *calendar;
 
 @end

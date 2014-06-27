@@ -70,7 +70,10 @@
     event.endDate = endTime;  //set 1 hour meeting
     [event setCalendar:[_store defaultCalendarForNewEvents]];
     NSError *err = nil;
-    [_store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+    if(![_store saveEvent:event span:EKSpanThisEvent commit:YES error:&err]) {
+        NSLog(@"Unable to save event! %@", err);
+        [[[UIAlertView alloc] initWithTitle:err.localizedDescription message:err.localizedRecoverySuggestion delegate:nil cancelButtonTitle:@"Abandon all hope" otherButtonTitles:nil] show];
+    }
     savedEventId = event.eventIdentifier;  //this is so you can access this event later
     return event;
 }

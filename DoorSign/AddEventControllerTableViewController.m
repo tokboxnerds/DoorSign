@@ -18,11 +18,16 @@
 
 @implementation AddEventControllerTableViewController
 
+- (IBAction)cancelAddEvent:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)addEvent:(id)sender {
-    NSLog(@" DOne clicked %@ %@",self.eventNameField.text,self.startDate.date);
+    NSLog(@" DOne clicked %@ %@ -> %@ to %@",self.eventNameField.text, self.startDate.date, self.endDate.date, self.calendar.title);
     //    self.eventNameField.text;
-    DoorSignCalendar *addEvent = [[DoorSignCalendar alloc] init];
-    [addEvent addEvent:self.eventNameField.text startTime:self.startDate.date endTime:self.endDate.date];
+    
+    [self.calendar addEvent:self.eventNameField.text startTime:self.startDate.date endTime:self.endDate.date];
+    [self cancelAddEvent:sender];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -37,6 +42,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.eventNameField.text = @"Untitled event";
+    self.startDate.date = [NSDate date];
+    self.endDate.date = [NSDate date];
+    
+    self.startDate.minimumDate = [NSDate date];
+    self.endDate.minimumDate = [NSDate date];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
