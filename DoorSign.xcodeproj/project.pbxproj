@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61C0F5BA195CE0D600A144DB /* AddEventControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C0F5B9195CE0D600A144DB /* AddEventControllerTableViewController.m */; };
 		CD423A29195C8A4600745F6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A28195C8A4600745F6C /* main.m */; };
 		CD423A2C195C8A4600745F6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A2B195C8A4600745F6C /* AppDelegate.m */; };
 		CD423A2F195C8A4600745F6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A2E195C8A4600745F6C /* ViewController.m */; };
@@ -34,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		3F45E3ADEE064747B940297B /* Pods-DoorSign.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorSign.xcconfig"; path = "Pods/Pods-DoorSign.xcconfig"; sourceTree = "<group>"; };
+		61C0F5B8195CE0D600A144DB /* AddEventControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventControllerTableViewController.h; sourceTree = "<group>"; };
+		61C0F5B9195CE0D600A144DB /* AddEventControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventControllerTableViewController.m; sourceTree = "<group>"; };
 		677D56953BA44CF8A412A026 /* libPods-DoorSign.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoorSign.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD423A23195C8A4600745F6C /* DoorSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoorSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD423A27195C8A4600745F6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +124,8 @@
 				CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */,
 				CD5616AB195CD26B002BFD2D /* TodayUpcomingTableViewCell.h */,
 				CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */,
+				61C0F5B8195CE0D600A144DB /* AddEventControllerTableViewController.h */,
+				61C0F5B9195CE0D600A144DB /* AddEventControllerTableViewController.m */,
 			);
 			path = DoorSign;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C0F5BA195CE0D600A144DB /* AddEventControllerTableViewController.m in Sources */,
 				CD50C208195CB909001986DC /* TodayViewController.m in Sources */,
 				CD50C202195CB3C1001986DC /* DoorSignCalendar.m in Sources */,
 				CD423A2F195C8A4600745F6C /* ViewController.m in Sources */,

@@ -52,6 +52,7 @@
 
 - (void)getCalendars {
     NSArray *calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+    BOOL found = NO;
     for(EKCalendar *cal in calendars) {
         if(cal.type == EKCalendarTypeExchange && [cal.title isEqualToString:@"TokRoom"]) {
             NSLog(@"Getting events for %@", cal);
@@ -59,7 +60,14 @@
             TodayViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"todayView"];
             vc.calendar = calendar;
             [self presentViewController:vc animated:YES completion:nil];
+            found = YES;
         }
+    }
+    if(!found) {
+        DoorSignCalendar *calendar = [[DoorSignCalendar alloc] initWithCalendar:calendars[0]];
+        TodayViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"todayView"];
+        vc.calendar = calendar;
+        [self presentViewController:vc animated:YES completion:nil];
     }
 }
 
