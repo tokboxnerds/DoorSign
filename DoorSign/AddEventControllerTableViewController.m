@@ -30,6 +30,13 @@
     [self cancelAddEvent:sender];
 }
 
+- (IBAction)startDateChanged:(id)sender {
+    self.endDate.minimumDate = self.startDate.date;
+}
+- (IBAction)endDateChanged:(id)sender {
+    self.startDate.maximumDate = self.endDate.date;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];

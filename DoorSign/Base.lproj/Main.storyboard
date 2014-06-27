@@ -288,6 +288,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="425519220.480214">
                                                         <!--<__NSDate Class=2014-06-26 23:47:00 +0000 timeInterval=425519220.480214 ISO8601=2014-06-26T16:47:00.480-0700>-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="startDateChanged:" destination="mLd-vu-WTL" eventType="valueChanged" id="3sf-Ra-Eso"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -305,10 +308,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="bMv-TQ-Qav">
-                                                    <rect key="frame" x="133" y="0.0" width="247" height="162"/>
+                                                    <rect key="frame" x="133" y="3" width="247" height="162"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="425519210.91234499">
                                                         <!--<__NSDate Class=2014-06-26 23:46:50 +0000 timeInterval=425519210.912345 ISO8601=2014-06-26T16:46:50.912-0700>-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="endDateChanged:" destination="mLd-vu-WTL" eventType="valueChanged" id="nvg-q9-1gP"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                         </tableViewCellContentView>
