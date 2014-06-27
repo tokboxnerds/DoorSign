@@ -9,17 +9,6 @@
 #import "StartupViewController.h"
 #import "AppDelegate.h"
 
-//#import <EventKit/EventKit.h>
-//[[[EKEventStore alloc] init] requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-//    NSAssert(granted, @"Access not granted");
-//    if(error) {
-//        NSLog(@"Error accessing calendar %@", error);
-//        NSAssert(error == nil, @"Error accessing calendars");
-//    }
-//    
-//    NSLog(@"Access granted");
-//}];
-
 @interface StartupViewController ()
 
 @end
@@ -31,9 +20,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSLog(@"");
-    [delegate.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    [[[AppDelegate sharedDelegate] eventStore] requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         if(!granted) {
             [[[UIAlertView alloc] initWithTitle:@"Access to calendar denied" message:@"Access to the calendar is required for DoorSign to function. You will need to enable it in Settings to continue." delegate:nil cancelButtonTitle:@"Abandon all hope" otherButtonTitles:nil] show];
         } else if(error) {

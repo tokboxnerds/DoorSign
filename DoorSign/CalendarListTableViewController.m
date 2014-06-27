@@ -10,10 +10,10 @@
 #import <EventKit/EventKit.h>
 #import "DoorSignCalendar.h"
 #import "TodayViewController.h"
+#import "AppDelegate.h"
 
 @interface CalendarListTableViewController ()
 
-@property (nonatomic) EKEventStore *eventStore;
 @property (nonatomic) NSArray *calendars;
 
 @end
@@ -21,28 +21,37 @@
 @implementation CalendarListTableViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.eventStore = [[EKEventStore alloc] init];
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(refresh)
                                                  name:EKEventStoreChangedNotification
-                                               object:self.eventStore];
+                                               object:[[AppDelegate sharedDelegate] eventStore]];
     [self refresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:self.eventStore];
-    self.eventStore = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:EKEventStoreChangedNotification
+                                                  object:[[AppDelegate sharedDelegate] eventStore]];
 }
 
 #pragma mark - Update UI
 
 - (void)refresh
 {
-    NSArray *calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
-    self.calendars = [calendars sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    NSArray *calendars = [[[AppDelegate sharedDelegate] eventStore] calendarsForEntityType:EKEntityTypeEvent];
+    
+    NSMutableArray *cal = [NSMutableArray arrayWithCapacity:calendars.count];
+    for(EKCalendar *calendar in calendars) {
+        if(calendar.type != EKCalendarTypeBirthday) {
+            [cal addObject:calendar];
+        }
+    }
+    
+    self.calendars = [cal sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [((EKCalendar *)obj1).title compare:((EKCalendar *)obj2).title options:NSNumericSearch];
     }];
+    
     [self.tableView reloadData];
 }
 

@@ -9,11 +9,11 @@
 #import "TodayUpcomingTableViewController.h"
 #import "TodayUpcomingTableViewCell.h"
 #import "DoorSignCalendar.h"
+#import "AppDelegate.h"
 
 @interface TodayUpcomingTableViewController ()
 
 @property (nonatomic) NSArray *events;
-@property (nonatomic) EKEventStore *store;
 @property (nonatomic) NSTimer *timer;
 
 @end
@@ -25,18 +25,16 @@
     self.view.backgroundColor = [UIColor clearColor];
     
     NSLog(@"how about now? %@", self.calendar);
-    self.store = [[EKEventStore alloc] init];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refresh)
                                                  name:EKEventStoreChangedNotification
-                                               object:self.store];
+                                               object:[[AppDelegate sharedDelegate] eventStore]];
     [self refresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:self.store];
-    self.store = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:[[AppDelegate sharedDelegate] eventStore]];
     [self.timer invalidate];
     self.timer = nil;
 }

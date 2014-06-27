@@ -53,7 +53,7 @@
     self.startDate.minimumDate = [NSDate date];
     self.endDate.minimumDate = [NSDate date];
     self.startDate.date = [NSDate date];
-    self.endDate.date = [NSDate date];
+    self.endDate.date = [NSDate dateWithTimeIntervalSinceNow:30*60];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

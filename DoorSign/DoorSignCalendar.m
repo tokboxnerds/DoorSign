@@ -7,11 +7,11 @@
 //
 
 #import "DoorSignCalendar.h"
+#import "AppDelegate.h"
 
 @interface DoorSignCalendar ()
 
 @property (nonatomic) EKCalendar *calendar;
-@property (nonatomic) EKEventStore *store;
 
 @end
 
@@ -19,7 +19,6 @@
 
 - (instancetype)initWithCalendar:(EKCalendar*)calendar {
     if(self = [super init]) {
-        self.store = [[EKEventStore alloc] init];
         self.calendar = calendar;
         
     }
@@ -31,8 +30,8 @@
 }
 
 - (NSArray*)currentEvents {
-    NSPredicate *predicate = [self.store predicateForEventsWithStartDate:[NSDate date] endDate:[NSDate date] calendars:@[self.calendar]];
-    return [self.store eventsMatchingPredicate:predicate];
+    NSPredicate *predicate = [[[AppDelegate sharedDelegate] eventStore] predicateForEventsWithStartDate:[NSDate date] endDate:[NSDate date] calendars:@[self.calendar]];
+    return [[[AppDelegate sharedDelegate] eventStore] eventsMatchingPredicate:predicate];
 }
 
 - (NSArray*)todaysEvents {
@@ -45,9 +44,9 @@
 
     
     
-    NSPredicate *predicated = [self.store predicateForEventsWithStartDate:[NSDate date] endDate:tomorrow calendars:@[self.calendar]];
+    NSPredicate *predicated = [[[AppDelegate sharedDelegate] eventStore] predicateForEventsWithStartDate:[NSDate date] endDate:tomorrow calendars:@[self.calendar]];
     
-    NSArray *events = [self.store eventsMatchingPredicate:predicated];
+    NSArray *events = [[[AppDelegate sharedDelegate] eventStore] eventsMatchingPredicate:predicated];
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateStyle = NSDateFormatterMediumStyle;
@@ -61,20 +60,17 @@
 }
 
 - (EKEvent*)addEvent:(NSString*)title startTime:(NSDate*)startTime endTime:(NSDate*)endTime {
-    _store =[[EKEventStore alloc] init];
-    __block NSString *savedEventId =[[NSString alloc] init];
-
-    EKEvent *event = [EKEvent eventWithEventStore:_store];
+    EKEvent *event = [EKEvent eventWithEventStore:[[AppDelegate sharedDelegate] eventStore]];
     event.title = title;
-    event.startDate = startTime; //today
-    event.endDate = endTime;  //set 1 hour meeting
-    [event setCalendar:[_store defaultCalendarForNewEvents]];
+    event.startDate = startTime;
+    event.endDate = endTime;
+    NSLog(@"my calendar is %@", self.calendar.title);
+    event.calendar = self.calendar;
     NSError *err = nil;
-    if(![_store saveEvent:event span:EKSpanThisEvent commit:YES error:&err]) {
+    if(![[[AppDelegate sharedDelegate] eventStore] saveEvent:event span:EKSpanThisEvent error:&err]) {
         NSLog(@"Unable to save event! %@", err);
         [[[UIAlertView alloc] initWithTitle:err.localizedDescription message:err.localizedRecoverySuggestion delegate:nil cancelButtonTitle:@"Abandon all hope" otherButtonTitles:nil] show];
     }
-    savedEventId = event.eventIdentifier;  //this is so you can access this event later
     return event;
 }
 
