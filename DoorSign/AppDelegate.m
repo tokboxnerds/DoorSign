@@ -19,6 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     application.idleTimerDisabled = YES;
+    self.eventStore = [[EKEventStore alloc] init];
     return YES;
 }
 

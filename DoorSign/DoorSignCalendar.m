@@ -37,15 +37,15 @@
 
 - (NSArray*)todaysEvents {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *oneDayAgoComponents = [[NSDateComponents alloc] init];
-    oneDayAgoComponents.day = -1;
-    NSDate *oneDayAgo = [calendar dateByAddingComponents:oneDayAgoComponents toDate:[NSDate date] options:0];
-    
     NSDateComponents * tomorrowComponents = [[NSDateComponents alloc] init];
     tomorrowComponents.day = 1;
     NSDate *tomorrow = [calendar dateByAddingComponents:tomorrowComponents toDate:[NSDate date] options:0];
+
+    tomorrow = [calendar dateFromComponents:[calendar components: (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:tomorrow]];
+
     
-    NSPredicate *predicated = [self.store predicateForEventsWithStartDate:oneDayAgo endDate:tomorrow calendars:@[self.calendar]];
+    
+    NSPredicate *predicated = [self.store predicateForEventsWithStartDate:[NSDate date] endDate:tomorrow calendars:@[self.calendar]];
     
     NSArray *events = [self.store eventsMatchingPredicate:predicated];
     

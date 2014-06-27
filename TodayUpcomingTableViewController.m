@@ -13,48 +13,48 @@
 @interface TodayUpcomingTableViewController ()
 
 @property (nonatomic) NSArray *events;
+@property (nonatomic) EKEventStore *store;
+@property (nonatomic) NSTimer *timer;
 
 @end
 
 @implementation TodayUpcomingTableViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
     
     self.view.backgroundColor = [UIColor clearColor];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    NSLog(@"do we have calendar? %@", self.calendar);
-}
-
-- (void)viewWillAppear:(BOOL)animated {
     NSLog(@"how about now? %@", self.calendar);
-    self.events = [self.calendar todaysEvents];
+    self.store = [[EKEventStore alloc] init];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh)
+                                                 name:EKEventStoreChangedNotification
+                                               object:self.store];
+    [self refresh];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:self.store];
+    self.store = nil;
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)refresh {
+    self.events = [self.calendar todaysEvents];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return self.events.count;
 }
 
@@ -63,47 +63,11 @@
     TodayUpcomingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell" forIndexPath:indexPath];
     cell.event = self.events[indexPath.row];
     [cell configure];
-    
+    [[cell contentView] setBackgroundColor:[UIColor clearColor]];
+    [[cell backgroundView] setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

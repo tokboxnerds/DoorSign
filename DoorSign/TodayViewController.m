@@ -13,54 +13,46 @@
 
 @interface TodayViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *roomName;
+@property (weak, nonatomic) IBOutlet UIButton *roomNameButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentEventTitle;
 @property (weak, nonatomic) IBOutlet UILabel *currentEventMoreInfo;
 @property (weak, nonatomic) IBOutlet UILabel *currentEventTime;
 
 @property (nonatomic) EKEventStore *store;
+@property (nonatomic) NSTimer *timer;
 
 @end
 
 @implementation TodayViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (IBAction)changeRoom:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.roomName.text = self.calendar.title;
+    [self.roomNameButton setTitle:self.calendar.title forState:UIControlStateNormal];
     self.store = [[EKEventStore alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(storeChanged:)
+                                             selector:@selector(refresh)
                                                  name:EKEventStoreChangedNotification
                                                object:self.store];
     [self refresh];
-
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:self.store];
+    [self.timer invalidate];
+    self.timer = nil;
     self.store = nil;
-}
-
--(void)storeChanged:(NSNotification*)notification {
-    NSLog(@"Store updated!");
-    [self refresh];
 }
 
 -(BOOL)prefersStatusBarHidden {
     return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Update UI
 
 - (void)refresh {
     [self refreshCurrentEvent];
@@ -87,7 +79,7 @@
             }
         }
         
-        self.currentEventMoreInfo.text = [attendeeNames componentsJoinedByString:@","];
+        self.currentEventMoreInfo.text = [attendeeNames componentsJoinedByString:@", "];
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateStyle = NSDateFormatterNoStyle;
@@ -100,7 +92,6 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
@@ -109,9 +100,6 @@
         TodayUpcomingTableViewController *vc = segue.destinationViewController;
         vc.calendar = self.calendar;
     }
-    
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
 
 @end

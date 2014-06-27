@@ -9,147 +9,78 @@
 #import "CalendarListTableViewController.h"
 #import <EventKit/EventKit.h>
 #import "DoorSignCalendar.h"
-
+#import "TodayViewController.h"
 
 @interface CalendarListTableViewController ()
+
 @property (nonatomic) EKEventStore *eventStore;
-@property (nonatomic) DoorSignCalendar *calendar;
+@property (nonatomic) NSArray *calendars;
 
 @end
 
 @implementation CalendarListTableViewController
-NSMutableArray *listOfCalendars;
-- (instancetype)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.title = @"Pick a room";
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void)viewWillAppear:(BOOL)animated {
     self.eventStore = [[EKEventStore alloc] init];
-    NSArray *calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
-    listOfCalendars = [NSMutableArray array];
-    for(EKCalendar *cal in calendars) {
-        [listOfCalendars addObject:cal.title];
-
-        /*if(cal.type == EKCalendarTypeExchange) {
-            NSLog(@"Getting events for %@", cal);
-            DoorSignCalendar *calendar = [[DoorSignCalendar alloc] initWithCalendar:cal];
-            [calendar getEvents];
-        }*/
-    }
-    NSLog(@" Calendars %@",listOfCalendars);
-
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(refresh)
+                                                 name:EKEventStoreChangedNotification
+                                               object:self.eventStore];
+    [self refresh];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:self.eventStore];
+    self.eventStore = nil;
+}
+
+#pragma mark - Update UI
+
+- (void)refresh
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSArray *calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+    self.calendars = [calendars sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [((EKCalendar *)obj1).title compare:((EKCalendar *)obj2).title options:NSNumericSearch];
+    }];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [listOfCalendars count];
+    return self.calendars.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@" HI ");
-    static NSString *simpleTableIdentifier = @"SimpleTableCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
-    cell.textLabel.text = [listOfCalendars objectAtIndex:indexPath.row];
-    
-    for(int i=0; i < [listOfCalendars count]; i++) {
-        NSLog(@" Calendar List %lu", (unsigned long)[listOfCalendars indexOfObject:0]);
-    }
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"calendarNameCell"];
+    EKCalendar *calendar = self.calendars[indexPath.row];
+    cell.textLabel.text = calendar.title;
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    cell.backgroundView.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.highlightedTextColor = [UIColor darkGrayColor];
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    EKCalendar *calendar = listOfCalendars[indexPath.row];
-    DoorSignCalendar *cal = [[DoorSignCalendar alloc] initWithCalendar:calendar];
-    EKEvent *event = [cal addEvent:@"Something" startTime:[NSDate date] endTime:[NSDate date]];
-    NSLog(@" Event ID %@ ",event.eventIdentifier);
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"showRoomSegue"]) {
+        TodayViewController *vc = segue.destinationViewController;
+        NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+        vc.calendar = [[DoorSignCalendar alloc] initWithCalendar:self.calendars[selected.row]];
+        
+    }
 }
-*/
-
 @end

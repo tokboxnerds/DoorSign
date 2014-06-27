@@ -7,16 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "DoorSignCalendar.h"
 #import "TodayViewController.h"
 
 #import <EventKit/EventKit.h>
 
 @interface ViewController ()
-
-@property (nonatomic) EKEventStore *eventStore;
-@property (nonatomic) DoorSignCalendar *calendar;
-            
 
 @end
 
@@ -24,11 +19,7 @@
             
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.eventStore = [[EKEventStore alloc] init];
-    
-    
-    [self.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    [[[EKEventStore alloc] init] requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         NSAssert(granted, @"Access not granted");
         if(error) {
             NSLog(@"Error accessing calendar %@", error);
@@ -36,8 +27,6 @@
         }
         
         NSLog(@"Access granted");
-        [self getCalendars];
-        
     }];
 }
 
@@ -45,29 +34,5 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)getCalendars {
-    NSArray *calendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
-    for(EKCalendar *cal in calendars) {
-        if(cal.type == EKCalendarTypeExchange && [cal.title isEqualToString:@"TokRoom"]) {
-            NSLog(@"Getting events for %@", cal);
-            DoorSignCalendar *calendar = [[DoorSignCalendar alloc] initWithCalendar:cal];
-            TodayViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"todayView"];
-            vc.calendar = calendar;
-            [self presentViewController:vc animated:YES completion:nil];
-        }
-    }
-}
-
 @end
-
-
-//[[NSNotificationCenter defaultCenter] addObserver:self
-//                                         selector:@selector(storeChanged:)
-//                                             name:EKEventStoreChangedNotification
-//                                           object:eventStore];
 

@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		CD423A29195C8A4600745F6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A28195C8A4600745F6C /* main.m */; };
 		CD423A2C195C8A4600745F6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A2B195C8A4600745F6C /* AppDelegate.m */; };
-		CD423A2F195C8A4600745F6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A2E195C8A4600745F6C /* ViewController.m */; };
 		CD423A32195C8A4600745F6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD423A30195C8A4600745F6C /* Main.storyboard */; };
 		CD423A34195C8A4600745F6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD423A33195C8A4600745F6C /* Images.xcassets */; };
 		CD423A40195C8A4600745F6C /* DoorSignTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD423A3F195C8A4600745F6C /* DoorSignTests.m */; };
+		CD442DCF195DDD6800BFAC78 /* GradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD442DCE195DDD6800BFAC78 /* GradientBackgroundView.m */; };
+		CD442DD2195DDFF900BFAC78 /* RoomNameBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD442DD1195DDFF900BFAC78 /* RoomNameBackgroundView.m */; };
+		CD442DD5195DE28000BFAC78 /* CalendarListBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD442DD4195DE28000BFAC78 /* CalendarListBackgroundView.m */; };
+		CD442DD8195DEC5400BFAC78 /* StartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD442DD7195DEC5400BFAC78 /* StartupViewController.m */; };
 		CD50C202195CB3C1001986DC /* DoorSignCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50C201195CB3C1001986DC /* DoorSignCalendar.m */; };
 		CD50C205195CB65F001986DC /* CalendarListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50C204195CB65F001986DC /* CalendarListTableViewController.m */; };
 		CD50C208195CB909001986DC /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD50C207195CB909001986DC /* TodayViewController.m */; };
@@ -40,13 +43,19 @@
 		CD423A28195C8A4600745F6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CD423A2A195C8A4600745F6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CD423A2B195C8A4600745F6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CD423A2D195C8A4600745F6C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CD423A2E195C8A4600745F6C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CD423A31195C8A4600745F6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD423A33195C8A4600745F6C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CD423A39195C8A4600745F6C /* DoorSignTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoorSignTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD423A3E195C8A4600745F6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD423A3F195C8A4600745F6C /* DoorSignTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorSignTests.m; sourceTree = "<group>"; };
+		CD442DCD195DDD6800BFAC78 /* GradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientBackgroundView.h; sourceTree = "<group>"; };
+		CD442DCE195DDD6800BFAC78 /* GradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientBackgroundView.m; sourceTree = "<group>"; };
+		CD442DD0195DDFF900BFAC78 /* RoomNameBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomNameBackgroundView.h; sourceTree = "<group>"; };
+		CD442DD1195DDFF900BFAC78 /* RoomNameBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomNameBackgroundView.m; sourceTree = "<group>"; };
+		CD442DD3195DE28000BFAC78 /* CalendarListBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarListBackgroundView.h; sourceTree = "<group>"; };
+		CD442DD4195DE28000BFAC78 /* CalendarListBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarListBackgroundView.m; sourceTree = "<group>"; };
+		CD442DD6195DEC5400BFAC78 /* StartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupViewController.h; sourceTree = "<group>"; };
+		CD442DD7195DEC5400BFAC78 /* StartupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupViewController.m; sourceTree = "<group>"; };
 		CD50C200195CB3C1001986DC /* DoorSignCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoorSignCalendar.h; sourceTree = "<group>"; };
 		CD50C201195CB3C1001986DC /* DoorSignCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorSignCalendar.m; sourceTree = "<group>"; };
 		CD50C203195CB65F001986DC /* CalendarListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarListTableViewController.h; sourceTree = "<group>"; };
@@ -106,8 +115,6 @@
 			children = (
 				CD423A2A195C8A4600745F6C /* AppDelegate.h */,
 				CD423A2B195C8A4600745F6C /* AppDelegate.m */,
-				CD423A2D195C8A4600745F6C /* ViewController.h */,
-				CD423A2E195C8A4600745F6C /* ViewController.m */,
 				CD423A30195C8A4600745F6C /* Main.storyboard */,
 				CD423A33195C8A4600745F6C /* Images.xcassets */,
 				CD423A26195C8A4600745F6C /* Supporting Files */,
@@ -121,6 +128,14 @@
 				CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */,
 				CD5616AB195CD26B002BFD2D /* TodayUpcomingTableViewCell.h */,
 				CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */,
+				CD442DCD195DDD6800BFAC78 /* GradientBackgroundView.h */,
+				CD442DCE195DDD6800BFAC78 /* GradientBackgroundView.m */,
+				CD442DD0195DDFF900BFAC78 /* RoomNameBackgroundView.h */,
+				CD442DD1195DDFF900BFAC78 /* RoomNameBackgroundView.m */,
+				CD442DD3195DE28000BFAC78 /* CalendarListBackgroundView.h */,
+				CD442DD4195DE28000BFAC78 /* CalendarListBackgroundView.m */,
+				CD442DD6195DEC5400BFAC78 /* StartupViewController.h */,
+				CD442DD7195DEC5400BFAC78 /* StartupViewController.m */,
 			);
 			path = DoorSign;
 			sourceTree = "<group>";
@@ -210,7 +225,7 @@
 				TargetAttributes = {
 					CD423A22195C8A4600745F6C = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = MGD69Q275W;
+						DevelopmentTeam = WA4JA55S9R;
 					};
 					CD423A38195C8A4600745F6C = {
 						CreatedOnToolsVersion = 6.0;
@@ -261,11 +276,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD442DD2195DDFF900BFAC78 /* RoomNameBackgroundView.m in Sources */,
 				CD50C208195CB909001986DC /* TodayViewController.m in Sources */,
+				CD442DCF195DDD6800BFAC78 /* GradientBackgroundView.m in Sources */,
 				CD50C202195CB3C1001986DC /* DoorSignCalendar.m in Sources */,
-				CD423A2F195C8A4600745F6C /* ViewController.m in Sources */,
 				CD423A2C195C8A4600745F6C /* AppDelegate.m in Sources */,
+				CD442DD5195DE28000BFAC78 /* CalendarListBackgroundView.m in Sources */,
 				CD5616AA195CCF68002BFD2D /* TodayUpcomingTableViewController.m in Sources */,
+				CD442DD8195DEC5400BFAC78 /* StartupViewController.m in Sources */,
 				CD5616AD195CD26B002BFD2D /* TodayUpcomingTableViewCell.m in Sources */,
 				CD50C205195CB65F001986DC /* CalendarListTableViewController.m in Sources */,
 				CD423A29195C8A4600745F6C /* main.m in Sources */,
@@ -382,7 +400,6 @@
 		};
 		CD423A44195C8A4600745F6C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F45E3ADEE064747B940297B /* Pods-DoorSign.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
