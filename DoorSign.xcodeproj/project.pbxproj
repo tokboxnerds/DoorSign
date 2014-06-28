@@ -37,10 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F45E3ADEE064747B940297B /* Pods-DoorSign.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorSign.xcconfig"; path = "Pods/Pods-DoorSign.xcconfig"; sourceTree = "<group>"; };
 		61C0F5B8195CE0D600A144DB /* AddEventControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventControllerTableViewController.h; sourceTree = "<group>"; };
 		61C0F5B9195CE0D600A144DB /* AddEventControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventControllerTableViewController.m; sourceTree = "<group>"; };
-		677D56953BA44CF8A412A026 /* libPods-DoorSign.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoorSign.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD423A23195C8A4600745F6C /* DoorSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoorSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD423A27195C8A4600745F6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD423A28195C8A4600745F6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 				CD423A25195C8A4600745F6C /* DoorSign */,
 				CD423A3C195C8A4600745F6C /* DoorSignTests */,
 				CD423A24195C8A4600745F6C /* Products */,
-				3F45E3ADEE064747B940297B /* Pods-DoorSign.xcconfig */,
 				DDA243F164C24A229F487455 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -116,25 +113,15 @@
 		CD423A25195C8A4600745F6C /* DoorSign */ = {
 			isa = PBXGroup;
 			children = (
+				CD423A2A195C8A4600745F6C /* AppDelegate.h */,
+				CD423A2B195C8A4600745F6C /* AppDelegate.m */,
 				CD423A30195C8A4600745F6C /* Main.storyboard */,
 				CD423A33195C8A4600745F6C /* Images.xcassets */,
 				CD423A26195C8A4600745F6C /* Supporting Files */,
 				CD7F14B2195E88E30090FE84 /* Views */,
 				CD7F14B3195E891B0090FE84 /* Cells */,
-				CD423A2A195C8A4600745F6C /* AppDelegate.h */,
-				CD423A2B195C8A4600745F6C /* AppDelegate.m */,
-				CD442DD6195DEC5400BFAC78 /* StartupViewController.h */,
-				CD442DD7195DEC5400BFAC78 /* StartupViewController.m */,
-				CD50C200195CB3C1001986DC /* DoorSignCalendar.h */,
-				CD50C201195CB3C1001986DC /* DoorSignCalendar.m */,
-				CD50C203195CB65F001986DC /* CalendarListTableViewController.h */,
-				CD50C204195CB65F001986DC /* CalendarListTableViewController.m */,
-				CD50C206195CB909001986DC /* TodayViewController.h */,
-				CD50C207195CB909001986DC /* TodayViewController.m */,
-				CD5616A8195CCF68002BFD2D /* TodayUpcomingTableViewController.h */,
-				CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */,
-				61C0F5B8195CE0D600A144DB /* AddEventControllerTableViewController.h */,
-				61C0F5B9195CE0D600A144DB /* AddEventControllerTableViewController.m */,
+				CD7F14B4195E8A550090FE84 /* Models */,
+				CD7F14B5195E8A6C0090FE84 /* View Controllers */,
 			);
 			path = DoorSign;
 			sourceTree = "<group>";
@@ -187,12 +174,69 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		CD7F14B4195E8A550090FE84 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CD50C200195CB3C1001986DC /* DoorSignCalendar.h */,
+				CD50C201195CB3C1001986DC /* DoorSignCalendar.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		CD7F14B5195E8A6C0090FE84 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD7F14B6195E8A760090FE84 /* Startup */,
+				CD7F14B7195E8A860090FE84 /* Calendar List */,
+				CD7F14B8195E8AA20090FE84 /* Room */,
+				CD7F14B9195E8AAF0090FE84 /* Make Boooking */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		CD7F14B6195E8A760090FE84 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				CD442DD6195DEC5400BFAC78 /* StartupViewController.h */,
+				CD442DD7195DEC5400BFAC78 /* StartupViewController.m */,
+			);
+			name = Startup;
+			sourceTree = "<group>";
+		};
+		CD7F14B7195E8A860090FE84 /* Calendar List */ = {
+			isa = PBXGroup;
+			children = (
+				CD50C203195CB65F001986DC /* CalendarListTableViewController.h */,
+				CD50C204195CB65F001986DC /* CalendarListTableViewController.m */,
+			);
+			name = "Calendar List";
+			sourceTree = "<group>";
+		};
+		CD7F14B8195E8AA20090FE84 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				CD50C206195CB909001986DC /* TodayViewController.h */,
+				CD50C207195CB909001986DC /* TodayViewController.m */,
+				CD5616A8195CCF68002BFD2D /* TodayUpcomingTableViewController.h */,
+				CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */,
+			);
+			name = Room;
+			sourceTree = "<group>";
+		};
+		CD7F14B9195E8AAF0090FE84 /* Make Boooking */ = {
+			isa = PBXGroup;
+			children = (
+				61C0F5B8195CE0D600A144DB /* AddEventControllerTableViewController.h */,
+				61C0F5B9195CE0D600A144DB /* AddEventControllerTableViewController.m */,
+			);
+			name = "Make Boooking";
+			sourceTree = "<group>";
+		};
 		DDA243F164C24A229F487455 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				CDAEAC06195CA00300774277 /* EventKit.framework */,
 				CDAEAC07195CA00300774277 /* EventKitUI.framework */,
-				677D56953BA44CF8A412A026 /* libPods-DoorSign.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

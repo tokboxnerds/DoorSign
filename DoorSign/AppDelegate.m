@@ -24,10 +24,14 @@
 }
 
 + (NSString*)timeForDate:(NSDate*)date {
-    NSDateFormatter *f = [[NSDateFormatter alloc] init];
-    f.dateStyle = NSDateFormatterNoStyle;
-    f.timeStyle = NSDateFormatterShortStyle;
-    return [f stringFromDate:date];
+    static dispatch_once_t onceToken;
+    static NSDateFormatter *formatter;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterNoStyle;
+        formatter.timeStyle = NSDateFormatterShortStyle;
+    });
+    return [formatter stringFromDate:date];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
