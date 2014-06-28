@@ -20,7 +20,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    [[[AppDelegate sharedDelegate] eventStore] requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+    [[AppDelegate eventStore] requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         if(!granted) {
             [[[UIAlertView alloc] initWithTitle:@"Access to calendar denied" message:@"Access to the calendar is required for DoorSign to function. You will need to enable it in Settings to continue." delegate:nil cancelButtonTitle:@"Abandon all hope" otherButtonTitles:nil] show];
         } else if(error) {

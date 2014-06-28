@@ -15,6 +15,9 @@
 @property (strong, nonatomic) EKEventStore *eventStore;
 
 + (AppDelegate*)sharedDelegate;
++ (EKEventStore*)eventStore;
+
++ (NSString*)timeForDate:(NSDate*)date;
 
 @end
 

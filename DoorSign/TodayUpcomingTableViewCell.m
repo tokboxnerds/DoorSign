@@ -7,6 +7,7 @@
 //
 
 #import "TodayUpcomingTableViewCell.h"
+#import "AppDelegate.h"
 
 @interface TodayUpcomingTableViewCell()
 
@@ -18,10 +19,7 @@
 @implementation TodayUpcomingTableViewCell
 
 - (void)configure {
-    NSDateFormatter *f = [[NSDateFormatter alloc] init];
-    f.dateStyle = NSDateFormatterNoStyle;
-    f.timeStyle = NSDateFormatterShortStyle;
-    self.startTime.text = [f stringFromDate:self.event.startDate];
+    self.startTime.text = [AppDelegate timeForDate:self.event.startDate];
     self.eventTitle.text = self.event.title;
 }
 

@@ -36,13 +36,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refresh)
                                                  name:EKEventStoreChangedNotification
-                                               object:[[AppDelegate sharedDelegate] eventStore]];
+                                               object:[AppDelegate eventStore]];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0
+                                                  target:self
+                                                selector:@selector(refresh)
+                                                userInfo:nil
+                                                 repeats:YES];
     [self refresh];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(refresh) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:[[AppDelegate sharedDelegate] eventStore]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:EKEventStoreChangedNotification
+                                                  object:[AppDelegate eventStore]];
     [self.timer invalidate];
     self.timer = nil;
 }
@@ -67,25 +73,20 @@
         self.currentEventTitle.text = @"Oh no!";
         self.currentEventMoreInfo.text = @"There are conflicting events in this room.";
     } else {
-        EKEvent *event = currentEvents[0];
-        self.currentEventTitle.text = event.title;
+        EKEvent *event = currentEvents.firstObject;
         
         NSMutableArray *attendeeNames = [NSMutableArray arrayWithCapacity:event.attendees.count];
-        
         for(EKParticipant *attendee in event.attendees) {
             if(attendee.name != self.calendar.title) {
                 [attendeeNames addObject:attendee.name];
             }
         }
         
+        self.currentEventTitle.text = event.title;
         self.currentEventMoreInfo.text = [attendeeNames componentsJoinedByString:@", "];
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateStyle = NSDateFormatterNoStyle;
-        formatter.timeStyle = NSDateFormatterShortStyle;
         self.currentEventTime.text = [NSString stringWithFormat:@"%@-%@",
-                                      [formatter stringFromDate:event.startDate],
-                                      [formatter stringFromDate:event.endDate]];
+                                      [AppDelegate timeForDate:event.startDate],
+                                      [AppDelegate timeForDate:event.endDate]];
     }
 }
 
@@ -94,14 +95,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"todayUpcomingEmbed"]) {
-        NSLog(@"prepare for segue... %@", segue);
-        TodayUpcomingTableViewController *vc = segue.destinationViewController;
-        vc.calendar = self.calendar;
+        ((TodayUpcomingTableViewController *)segue.destinationViewController).calendar = self.calendar;
     } else if([segue.identifier isEqualToString:@"addEventSegue"]) {
-        NSLog(@"prepare for addEventSegue");
         UINavigationController *root = segue.destinationViewController;
-        AddEventControllerTableViewController *addVC = (AddEventControllerTableViewController *)root.topViewController;
-        addVC.calendar = self.calendar;
+        ((AddEventControllerTableViewController *)root.topViewController).calendar = self.calendar;
     }
 }
 

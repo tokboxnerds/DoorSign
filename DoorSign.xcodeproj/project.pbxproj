@@ -65,8 +65,8 @@
 		CD50C204195CB65F001986DC /* CalendarListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarListTableViewController.m; sourceTree = "<group>"; };
 		CD50C206195CB909001986DC /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		CD50C207195CB909001986DC /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
-		CD5616A8195CCF68002BFD2D /* TodayUpcomingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayUpcomingTableViewController.h; path = ../TodayUpcomingTableViewController.h; sourceTree = "<group>"; };
-		CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayUpcomingTableViewController.m; path = ../TodayUpcomingTableViewController.m; sourceTree = "<group>"; };
+		CD5616A8195CCF68002BFD2D /* TodayUpcomingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayUpcomingTableViewController.h; sourceTree = "<group>"; };
+		CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayUpcomingTableViewController.m; sourceTree = "<group>"; };
 		CD5616AB195CD26B002BFD2D /* TodayUpcomingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayUpcomingTableViewCell.h; sourceTree = "<group>"; };
 		CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayUpcomingTableViewCell.m; sourceTree = "<group>"; };
 		CDAEAC06195CA00300774277 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -116,11 +116,15 @@
 		CD423A25195C8A4600745F6C /* DoorSign */ = {
 			isa = PBXGroup;
 			children = (
-				CD423A2A195C8A4600745F6C /* AppDelegate.h */,
-				CD423A2B195C8A4600745F6C /* AppDelegate.m */,
 				CD423A30195C8A4600745F6C /* Main.storyboard */,
 				CD423A33195C8A4600745F6C /* Images.xcassets */,
 				CD423A26195C8A4600745F6C /* Supporting Files */,
+				CD7F14B2195E88E30090FE84 /* Views */,
+				CD7F14B3195E891B0090FE84 /* Cells */,
+				CD423A2A195C8A4600745F6C /* AppDelegate.h */,
+				CD423A2B195C8A4600745F6C /* AppDelegate.m */,
+				CD442DD6195DEC5400BFAC78 /* StartupViewController.h */,
+				CD442DD7195DEC5400BFAC78 /* StartupViewController.m */,
 				CD50C200195CB3C1001986DC /* DoorSignCalendar.h */,
 				CD50C201195CB3C1001986DC /* DoorSignCalendar.m */,
 				CD50C203195CB65F001986DC /* CalendarListTableViewController.h */,
@@ -129,16 +133,6 @@
 				CD50C207195CB909001986DC /* TodayViewController.m */,
 				CD5616A8195CCF68002BFD2D /* TodayUpcomingTableViewController.h */,
 				CD5616A9195CCF68002BFD2D /* TodayUpcomingTableViewController.m */,
-				CD5616AB195CD26B002BFD2D /* TodayUpcomingTableViewCell.h */,
-				CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */,
-				CD442DCD195DDD6800BFAC78 /* GradientBackgroundView.h */,
-				CD442DCE195DDD6800BFAC78 /* GradientBackgroundView.m */,
-				CD442DD0195DDFF900BFAC78 /* RoomNameBackgroundView.h */,
-				CD442DD1195DDFF900BFAC78 /* RoomNameBackgroundView.m */,
-				CD442DD3195DE28000BFAC78 /* CalendarListBackgroundView.h */,
-				CD442DD4195DE28000BFAC78 /* CalendarListBackgroundView.m */,
-				CD442DD6195DEC5400BFAC78 /* StartupViewController.h */,
-				CD442DD7195DEC5400BFAC78 /* StartupViewController.m */,
 				61C0F5B8195CE0D600A144DB /* AddEventControllerTableViewController.h */,
 				61C0F5B9195CE0D600A144DB /* AddEventControllerTableViewController.m */,
 			);
@@ -169,6 +163,28 @@
 				CD423A3E195C8A4600745F6C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD7F14B2195E88E30090FE84 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CD442DCD195DDD6800BFAC78 /* GradientBackgroundView.h */,
+				CD442DCE195DDD6800BFAC78 /* GradientBackgroundView.m */,
+				CD442DD0195DDFF900BFAC78 /* RoomNameBackgroundView.h */,
+				CD442DD1195DDFF900BFAC78 /* RoomNameBackgroundView.m */,
+				CD442DD3195DE28000BFAC78 /* CalendarListBackgroundView.h */,
+				CD442DD4195DE28000BFAC78 /* CalendarListBackgroundView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		CD7F14B3195E891B0090FE84 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CD5616AB195CD26B002BFD2D /* TodayUpcomingTableViewCell.h */,
+				CD5616AC195CD26B002BFD2D /* TodayUpcomingTableViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		DDA243F164C24A229F487455 /* Frameworks */ = {
@@ -422,7 +438,6 @@
 		};
 		CD423A45195C8A4600745F6C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F45E3ADEE064747B940297B /* Pods-DoorSign.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -25,30 +25,28 @@
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(refresh)
                                                  name:EKEventStoreChangedNotification
-                                               object:[[AppDelegate sharedDelegate] eventStore]];
+                                               object:[AppDelegate eventStore]];
     [self refresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:EKEventStoreChangedNotification
-                                                  object:[[AppDelegate sharedDelegate] eventStore]];
+                                                  object:[AppDelegate eventStore]];
 }
 
 #pragma mark - Update UI
 
-- (void)refresh
-{
-    NSArray *calendars = [[[AppDelegate sharedDelegate] eventStore] calendarsForEntityType:EKEntityTypeEvent];
+- (void)refresh {
+    EKEventStore *store = [AppDelegate eventStore];
     
-    NSMutableArray *cal = [NSMutableArray arrayWithCapacity:calendars.count];
-    for(EKCalendar *calendar in calendars) {
-        if(calendar.type != EKCalendarTypeBirthday) {
-            [cal addObject:calendar];
-        }
-    }
+    NSPredicate *onlyGoodCalendars = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ((EKCalendar*)evaluatedObject).type != EKCalendarTypeBirthday;
+    }];
     
-    self.calendars = [cal sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    NSArray *calendars = [[store calendarsForEntityType:EKEntityTypeEvent] filteredArrayUsingPredicate:onlyGoodCalendars];
+    
+    self.calendars = [calendars sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [((EKCalendar *)obj1).title compare:((EKCalendar *)obj2).title options:NSNumericSearch];
     }];
     
@@ -57,19 +55,16 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.calendars.count;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"calendarNameCell"];
     EKCalendar *calendar = self.calendars[indexPath.row];
     cell.textLabel.text = calendar.title;
@@ -83,13 +78,12 @@
 
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"showRoomSegue"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         TodayViewController *vc = segue.destinationViewController;
-        NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
-        vc.calendar = [[DoorSignCalendar alloc] initWithCalendar:self.calendars[selected.row]];
-        
+        vc.calendar = [[DoorSignCalendar alloc] initWithCalendar:self.calendars[indexPath.row]];
     }
 }
+
 @end

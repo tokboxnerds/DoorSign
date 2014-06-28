@@ -18,33 +18,6 @@
 
 @implementation AddEventControllerTableViewController
 
-- (IBAction)cancelAddEvent:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)addEvent:(id)sender {
-    NSLog(@" DOne clicked %@ %@ -> %@ to %@",self.eventNameField.text, self.startDate.date, self.endDate.date, self.calendar.title);
-    //    self.eventNameField.text;
-    
-    [self.calendar addEvent:self.eventNameField.text startTime:self.startDate.date endTime:self.endDate.date];
-    [self cancelAddEvent:sender];
-}
-
-- (IBAction)startDateChanged:(id)sender {
-    self.endDate.minimumDate = self.startDate.date;
-}
-- (IBAction)endDateChanged:(id)sender {
-    self.startDate.maximumDate = self.endDate.date;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -57,7 +30,27 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.eventNameField becomeFirstResponder];
+}
+
+#pragma mark - Actions
+
+- (IBAction)cancelAddEvent:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)addEvent:(id)sender {
+    [self.calendar addEvent:self.eventNameField.text startTime:self.startDate.date endTime:self.endDate.date];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)startDateChanged:(id)sender {
+    self.endDate.minimumDate = self.startDate.date;
+}
+
+- (IBAction)endDateChanged:(id)sender {
+    self.startDate.maximumDate = self.endDate.date;
 }
 
 @end
