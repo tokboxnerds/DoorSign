@@ -290,7 +290,7 @@
 				TargetAttributes = {
 					CD423A22195C8A4600745F6C = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = WA4JA55S9R;
+						DevelopmentTeam = MGD69Q275W;
 					};
 					CD423A38195C8A4600745F6C = {
 						CreatedOnToolsVersion = 6.0;
