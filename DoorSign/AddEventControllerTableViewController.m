@@ -22,6 +22,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  
+    [[UITableView appearanceWhenContainedIn:[UIDatePicker class], nil] setBackgroundColor:nil]; // for iOS 8
+    [[UITableViewCell appearanceWhenContainedIn:[UIDatePicker class], [UITableView class], nil] setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.0]]; // for iOS 7
+  
     self.eventNameField.text = @"Meeting";
     self.startDate.minimumDate = [NSDate date];
     self.endDate.minimumDate = [NSDate date];
@@ -31,7 +35,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.eventNameField becomeFirstResponder];
 }
 
 #pragma mark - Actions

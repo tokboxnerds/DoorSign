@@ -17,7 +17,7 @@
 + (AppDelegate*)sharedDelegate;
 + (EKEventStore*)eventStore;
 
-+ (NSString*)timeForDate:(NSDate*)date;
++ (NSString*)timeForDate:(NSDate *)date;
 
 @end
 

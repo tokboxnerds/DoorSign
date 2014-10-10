@@ -43,7 +43,7 @@
     tomorrowComponents.day = 1;
 
     NSDate *tomorrow = [calendar dateByAddingComponents:tomorrowComponents toDate:[NSDate date] options:0];
-    tomorrow = [calendar dateFromComponents:[calendar components: (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:tomorrow]];
+    tomorrow = [calendar dateFromComponents:[calendar components: (NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:tomorrow]];
     
     return [store eventsMatchingPredicate:[store predicateForEventsWithStartDate:[NSDate date]
                                                                          endDate:tomorrow
