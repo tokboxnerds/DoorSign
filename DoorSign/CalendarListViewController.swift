@@ -8,8 +8,17 @@
 
 import UIKit
 
+extension NSBundle {
+  
+  func infoDictionaryStringForKey(key: String) -> String? {
+    return self.infoDictionary?[key] as? String
+  }
+  
+}
+
 class CalendarListViewController: UIViewController {
 
+  @IBOutlet weak var versionStringDisplay: UILabel!
 
   override func prefersStatusBarHidden() -> Bool {
     return false
@@ -17,6 +26,15 @@ class CalendarListViewController: UIViewController {
 
   override func preferredStatusBarStyle() -> UIStatusBarStyle {
     return .LightContent
+  }
+  
+  override func viewDidLoad() {
+    let bundle = NSBundle.mainBundle()
+    let name = bundle.infoDictionaryStringForKey("CFBundleName") ?? ""
+    let version = bundle.infoDictionaryStringForKey("CFBundleShortVersionString") ?? ""
+    let build = bundle.infoDictionaryStringForKey("CFBundleVersion") ?? ""
+    
+    self.versionStringDisplay.text = "\(name) v\(version) (\(build))"
   }
   
 }
