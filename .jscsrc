@@ -1,0 +1,17 @@
+{
+  "preset": "airbnb",
+  "disallowKeywordsOnNewLine": ["else", "catch"],
+  "disallowTrailingWhitespace": "ignoreEmptyLines",
+  "disallowQuotedKeysInObjects": "allButReserved",
+  "disallowTrailingWhitespace": "ignoreEmptyLines",
+  "requireCurlyBraces": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "try",
+    "catch"
+  ],
+  "esnext": "true"
+}
