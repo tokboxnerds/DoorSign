@@ -20,12 +20,8 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
 
 # node.js
 #
 node_modules/
 npm-debug.log
-
-# built by webpack
-index.ios.js

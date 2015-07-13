@@ -1,0 +1,21 @@
+{
+    "ecmaFeatures": {
+        "arrowFunctions": true,
+        "jsx": true,
+        "modules": true
+    },
+    "rules": {
+        "quotes": 0,
+        "comma-dangle": 0,
+        "no-trailing-spaces": [2, { "skipBlankLines": true }]
+    },
+    "plugins": [
+      "react"
+    ],
+
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    }
+}
