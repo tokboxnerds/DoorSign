@@ -1,7 +1,7 @@
 DoorSign
 ========
 
-DoorSign is an iPad (iOS7.1+) application designed to show the status of meeting rooms using calendars available on the local device.
+DoorSign is an iPad (iOS8.2+) application designed to show the status of meeting rooms using calendars available on the local device.
 
 For a one off room you can use any calendar available on a device. If you want to show the availability of a resource (e.g. a meeting room), the calendar for that resource must be synced to the device. For the best experience use activesync ("Microsoft Exchange" account type) and make sure "Push" is not disabled.
 
@@ -36,6 +36,7 @@ getting a copy running on your device.
 6. To run it on a device, change "localhost" to your own IP address (your device will need to be able to reach this).
 
 To build a new copy for distribution:
+
 1. Run `npm run build` in the same directory as this readme.
 2. If you've commented out the line ```jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];```
    now is the time to uncomment it.
