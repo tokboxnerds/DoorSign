@@ -1,22 +1,20 @@
 /*global require, fetch, setInterval, clearInterval*/
 /*jshint -W097, esnext:true */
 
-'use strict';
-
-var React = require('react-native');
-var {
+import React, {
   ListView,
   StyleSheet,
   Text,
   TouchableHighlight,
-  View,
-} = React;
+  View
+} from 'react-native';
 
-var {
-  awSnap
-} = require('../helpers.ios.js');
+import { awSnap } from '../helpers.ios';
+import LoadingView from './loading_view.ios';
+import CalendarManager from '../calendar-manager.ios';
+import RoomIcons from '../room_icons.ios.jsx';
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
   listViewContainer: {
     flex: 1,
@@ -42,7 +40,7 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Avenir',
     fontSize: 18,
-    color: '#ffffff',
+    color: 'rgba(255,255,255,0.5)',
   },
 
   listView: {
@@ -64,11 +62,9 @@ var styles = StyleSheet.create({
 
 });
 
-var LoadingView = require('./loading_view.ios.js');
+export default React.createClass({
+  name: 'SelectRoom',
 
-var CalendarManager = require('../calendar-manager.ios.js');
-
-var SelectRoom = React.createClass({
   getInitialState: function () {
       return {
         dataSource: new ListView.DataSource({
@@ -89,8 +85,11 @@ var SelectRoom = React.createClass({
       if (err) {
         awSnap(err.message, err.recoverySuggestion, ()=>{});
       }
+
+      const dataSource = calendarNames.filter( calendar => RoomIcons[calendar.title] != null);
+
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(calendarNames),
+        dataSource: this.state.dataSource.cloneWithRows(dataSource),
         loaded: true,
       });
     });
@@ -100,6 +99,12 @@ var SelectRoom = React.createClass({
       return (<LoadingView />);
     }
 
+    const {
+      CFBundleDisplayName,
+      CFBundleShortVersionString,
+      CFBundleVersion
+    } = this.props.bundleInfo;
+
     return (
       <View style={styles.listViewContainer}>
         <Text style={styles.listViewHeader}>Select Calendar</Text>
@@ -108,7 +113,9 @@ var SelectRoom = React.createClass({
           renderRow={this.renderCalendar}
           style={styles.listView}
         />
-        <Text style={styles.listViewFooter}>DoorSigns2 v3</Text>
+        <Text style={styles.listViewFooter}>
+          {CFBundleDisplayName} v{CFBundleShortVersionString} ({CFBundleVersion}). 👋 from Sydney.
+        </Text>
       </View>
     );
   },
@@ -143,5 +150,3 @@ class SelectableCalendar extends React.Component {
     this.props.onSelected(this.props.calendarIdentifier);
   }
 }
-
-module.exports = SelectRoom;

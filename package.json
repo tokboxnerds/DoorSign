@@ -1,16 +1,23 @@
 {
   "name": "DoorSigns2",
-  "version": "0.0.1",
+  "version": "2.0.10",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+    "start": "webpack --watch & node_modules/react-native/packager/packager.sh",
+    "build": "webpack && react-native bundle --minify"
   },
   "dependencies": {
-    "react-native": "^0.4.3"
+    "babel-core": "^5.6.18",
+    "babel-loader": "^5.3.1",
+    "imports-loader": "^0.6.4",
+    "node-libs-browser": "^0.5.2",
+    "react-native": "^0.7.1",
+    "webpack": "^1.10.1"
   },
   "devDependencies": {
     "eslint": "^0.21.2",
-    "eslint-plugin-react": "^2.3.0",
-    "jscs": "^1.13.1"
+    "eslint-plugin-react": "^2.7.0",
+    "jscs": "^1.13.1",
+    "react-native-cli": "^0.1.4"
   }
 }

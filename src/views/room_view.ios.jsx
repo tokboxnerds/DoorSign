@@ -1,25 +1,21 @@
 /*global require, fetch, setInterval, clearInterval*/
 /*jshint -W097, esnext:true */
 
-'use strict';
-
-var React = require('react-native');
-var {
+import React, {
   Image,
   StyleSheet,
   Text,
   TouchableHighlight,
-  View,
-} = React;
+  View
+} from 'react-native';
 
-var {
-  awSnap
-} = require('../helpers.ios.js');
+import { awSnap } from '../helpers.ios';
 
-var LoadingView = require('./loading_view.ios.js'),
-    CalendarManager = require('../calendar-manager.ios.js');
+import LoadingView from './loading_view.ios';
+import CalendarManager from '../calendar-manager.ios';
+import RoomIcons from '../room_icons.ios.jsx';
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
   roomContainer: {
     flex: 1,
@@ -76,12 +72,7 @@ var styles = StyleSheet.create({
 
 });
 
-var roomIcons = {
-  "Gold Rush": require('image!GoldRush'),
-  "Calendar": require('image!GoldRush'),
-};
-
-class Room extends React.Component {
+export default class Room extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -153,7 +144,7 @@ class Room extends React.Component {
       return (<LoadingView />);
     }
 
-    var eventDisplay;
+    let eventDisplay;
 
     // if in conflict
     if (this.state.currentEvents.length > 1) {
@@ -162,7 +153,7 @@ class Room extends React.Component {
     // if in use
     } else if (this.state.currentEvents.length === 1) {
 
-      var event = this.state.currentEvents[0];
+      const event = this.state.currentEvents[0];
 
       eventDisplay = (
         <View>
@@ -176,15 +167,15 @@ class Room extends React.Component {
     } else if (this.state.todaysEvents.length > 0) {
 
       // EKEvent *nextEvent = upcomingEvents.firstObject;
-      var nextEvent = this.state.todaysEvents[0];
+      const nextEvent = this.state.todaysEvents[0];
 
       // self.roomStatus.text = @"Available";
-      var roomStatus = "Available";
+      let roomStatus = "Available";
 
       // NSTimeInterval interval = [nextEvent.startDate timeIntervalSinceNow] / 60;
-      var interval = (nextEvent.startsAt - Date.now()) / 60000;
+      const interval = (nextEvent.startsAt - Date.now()) / 60000;
 
-      var availableForTime = "";
+      let availableForTime = "";
 
       if(interval > 60) {
         availableForTime = "";
@@ -249,7 +240,7 @@ class Room extends React.Component {
           <TouchableHighlight
             underlayColor="#146BA8"
             onPress={this.onPressChangeRoom.bind(this)}>
-              <Image source={roomIcons[this.state.calendarName]} style={styles.roomIcon} />
+              <Image source={RoomIcons[this.state.calendarName]} style={styles.roomIcon} />
           </TouchableHighlight>
         </View>
       </View>
@@ -260,7 +251,3 @@ class Room extends React.Component {
     this.props.onChangeRoom();
   }
 }
-
-
-
-module.exports = Room;

@@ -3,28 +3,25 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
-  DeviceEventEmitter,
-} = React;
+import { DeviceEventEmitter } from 'react-native';
 
-var NativeCalendarManager = require('NativeModules').CalendarManager;
+import NativeModules from 'NativeModules';
 
-var DEVICE_EVENTSTORE_EVENT = 'eventStoreChanged',
-    eventStoreChangedHandlers = {};
+const NativeCalendarManager = NativeModules.CalendarManager;
 
-var CalendarManager = {
+const DEVICE_EVENTSTORE_EVENT = 'eventStoreChanged';
+var eventStoreChangedHandlers = {};
+
+const CalendarManager = {
 
   addEventListener: function(type, handler) {
     eventStoreChangedHandlers[handler] = DeviceEventEmitter.addListener(
       DEVICE_EVENTSTORE_EVENT,
-      ()=> {
-        handler();
-      }
+      ()=> handler()
     );
 
     return {
-      remove: function() {
+      remove() {
         CalendarManager.removeEventListener(type, handler);
       }
     };
@@ -52,6 +49,8 @@ var CalendarManager = {
   todaysUpcomingEventsInCalendar:
     NativeCalendarManager.todaysUpcomingEventsInCalendar,
 
+  bundleInfo: NativeCalendarManager.bundleInfo
+
 };
 
-module.exports = CalendarManager;
+export default CalendarManager;

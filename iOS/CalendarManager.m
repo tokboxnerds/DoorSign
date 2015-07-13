@@ -33,7 +33,7 @@ NSDictionary *PQGMakeError(NSString *message, id toStringify, NSDictionary *extr
     id newObj = iterator(obj, idx);
     [returnableEvents addObject:newObj];
   }];
-  NSLog(@"pqg_map is going to return %@", returnableEvents);
+//  NSLog(@"pqg_map is going to return %@", returnableEvents);
   return returnableEvents;
 }
 
@@ -70,6 +70,22 @@ RCT_EXPORT_MODULE()
 }
 
 #pragma mark - Public API
+
+RCT_EXPORT_METHOD(bundleInfo:(RCTResponseSenderBlock)callback)
+{
+  NSDictionary *foo = [[NSBundle mainBundle] infoDictionary];
+  
+  NSMutableDictionary *bundleDictionary = [NSMutableDictionary dictionary];
+  
+  [[foo allKeys] enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {
+    id value = foo[key];
+    if (![value isKindOfClass:[NSURL class]]) {
+      bundleDictionary[key] = value;
+    }
+  }];
+  
+  callback(@[bundleDictionary]);
+}
 
 RCT_EXPORT_METHOD(requestAccessToCalendarEvents:(RCTResponseSenderBlock)callback)
 {

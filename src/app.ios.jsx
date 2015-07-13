@@ -1,25 +1,26 @@
-'use strict';
+import React from 'react-native';
 
-var React = require('react-native');
+import { awSnap } from './helpers.ios';
 
-var {
-  awSnap
-} = require('./helpers.ios.js');
+import CalendarManager from './calendar-manager.ios';
+import SelectRoom from './views/select_room.ios';
+import LoadingView from './views/loading_view.ios';
+import RoomView from './views/room_view.ios';
 
-var CalendarManager = require('./calendar-manager.ios.js'),
-    SelectRoom = require('./views/select_room.ios.js'),
-    LoadingView = require('./views/loading_view.ios.js'),
-    RoomView = require('./views/room_view.ios.js');
+export default React.createClass({
 
-var DoorSigns2 = React.createClass({
+  name: 'DoorSigns2',
+
   getInitialState: function() {
     return {
       hasPermission: false,
+      bundleInfo: null,
       selectedCalendarIdentifier: null,
     };
   },
   componentDidMount: function() {
     this.requestPermission();
+    this.getBundleInfo();
   },
   requestPermission: function() {
     CalendarManager.requestAccessToCalendarEvents(error => {
@@ -30,14 +31,19 @@ var DoorSigns2 = React.createClass({
       }
     });
   },
+
+  getBundleInfo: function() {
+    CalendarManager.bundleInfo(info => this.setState({ bundleInfo: info }) );
+  },
+
   render: function() {
-    if (!this.state.hasPermission) {
+    if (!this.state.hasPermission || !this.state.bundleInfo) {
       return (<LoadingView />);
     }
 
     if (!this.state.selectedCalendarIdentifier) {
       return (
-        <SelectRoom onSelectedCalendar={this.selectCalendar} />
+        <SelectRoom onSelectedCalendar={this.selectCalendar} bundleInfo={this.state.bundleInfo}/>
       );
     }
 
@@ -63,5 +69,3 @@ var DoorSigns2 = React.createClass({
     });
   }
 });
-
-module.exports = DoorSigns2;

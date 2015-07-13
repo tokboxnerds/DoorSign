@@ -18,6 +18,4 @@
 + (AppDelegate*)sharedDelegate;
 + (EKEventStore*)eventStore;
 
-+ (NSString*)timeForDate:(NSDate *)date;
-
 @end
